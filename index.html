@@ -4,8 +4,92 @@
 		<title>Poch'Lib</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<!-- Logo de l'onglet -->
+		<link rel="icon" href="images/logo.png" type="image/png">
+		
+		<!-- Police GoogleFont liée -->
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+        <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
+		<!-- Bibliothèque d'icônes Fontawesome liée "MARQUE PAGE ET CORBEILLE" -->
+        <script src="https://kit.fontawesome.com/7d7907f0c6.js" crossorigin="anonymous"></script>
+		
+		<!-- Fichiers CSS liés -->
+		<link href="style.css" rel="stylesheet">
+
+		<!-- Fichiers JavaScript liés -->
+		<script src="googleBooksApi.js" defer></script>
+		<script src="script.js" defer></script>
+		
+
   	</head>
   	<body>
+		<header>
+			<h1 class="title">Poch'Lib</h1>
+		</header>
+		<main id="myBooks">
+			<section id="newBook">
+				<h2 class="h2">Nouveau Livre</h2>
+				<div class="addBookAndSearchForm">
+					<input class="addBookButton" type="button" value="Ajouter un livre"/>
+					<!-- ou -->
+					<form class="searchForm">
+						<label for="title">Titre du livre</label>
+						<input type="text" name="title" id="title" required>
+						<label for="author">Auteur</label>
+						<input type="text" name="author" id="author" required>
+						<input class="searchButton" type="button" value="Rechercher"/>
+						<input class="cancelButton" type="button" value="Annuler"/>
+					</form>
+				</div>
+			</section>
+			<section id="searchResults">
+				<hr>
+				<h2 class="resultsOfSearch">Résultats de recherche</h2>
+				<h3 class="noBook">Aucun livre n'a été trouvé !</h3>
+				<!-- ou -->
+				<div class="books" id="googleBooks">
+					<article>
+						<div class="titleIdAuthorButton">
+							<div class="titleIdAuthor">
+								<h3 class="bookTitle">Titre : Titre du Livre</h3>
+								<h4 class="id">Id : Identifant du livre</h4>
+								<h5 class="bookAuthor">Auteur : Auteur du livre</h5>
+							</div>
+							<button type="button" class="bookmark" onclick="saveTheBook()"><i class="fa-solid fa-bookmark"></i></button>
+						</div>
+						<p class="description">Description : xxxxxxxxxx</p>
+						<img src="images/unavailable.png" alt="image du livre">
+					</article>
+				</div>
+			</section>
+			<section id="content">
+				<hr>
+				<h2 class="myPochList">Ma poch'liste</h2>
+				<div class="books" id="savedBooks">
+					<article>
+						<div class="titleIdAuthorButton">
+							<div class="titleIdAuthor">
+								<h3 class="bookTitle">Titre : Titre du Livre</h3>
+								<h4 class="id">Id : Identifant du livre</h3>
+								<h5 class="bookAuthor">Auteur : Auteur du livre</p>
+							</div>
+							<button type="button" class="trash" onclick="removeTheBook()"><i class="fa-solid fa-trash"></i></button>
+						</div>
+						<p class="description">Description : xxxxxxxxxx</p>
+						<img src="images/unavailable.png" alt="image du livre">
+					</article>
+				</div>
+			</section>
+		</main>
+		<footer>
+			<a class="lien-icone" href="index.html">
+				<img src="images/logo.png" alt="Logo Poch'Lib">
+			</a>
+		</footer>
+
 		<div id="myBooks">
 			<h1 class="title">Poch'Lib</h1>
 			<h2 class="h2">Nouveau Livre</h2>
