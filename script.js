@@ -29,7 +29,7 @@ window.addEventListener("load", function(){
     //création de la balise <input class="addBookButton" type="button" value="Ajouter un livre"/> sous div class="addBookAndSearchForm"
     //Au clic sur “Ajouter un livre”, le formulaire de recherche s’affiche :
     const addBookAndSearchFormDiv = document.querySelector(".addBookAndSearchForm");
-    createButton("addBookButton", "Ajouter un livre", addBookAndSearchFormDiv, showSearchForm);
+    createInputButton("addBookButton", "Ajouter un livre", addBookAndSearchFormDiv, showSearchForm);
 
     // création de la balise <section id="content"> sous main id="myBooks"
     createTagWithIdAttribute("section", myBooksMain, "content");
@@ -102,7 +102,7 @@ function createTagWithClassAttribute(childTag, parentTag, classValue){
  */
 function createTagWithClassAttributeAndInnertext(childTag, parentTag, classValue, innerTextValue){
 
-    // création de la balise <childTag class="classValue">
+    // création de la balise <childTag class="classValue">innerTextValue</childTag>
     const child = document.createElement(childTag);
     child.className = classValue;
     child.innerText = innerTextValue;
@@ -134,9 +134,9 @@ function createTagWithIdAttribute(childTag, parentTag, idValue){
  * @param { "String" } classValue - valeur de l'attribut class
  * @param { "String" } value - texte dans le bouton
  * @param { String } parent - nom du parent où la balise HTML est rattachée
- * @param { String() } clickFunction - nom de la fonction qui s'éxecute au click avec ()
+ * @param { String } clickFunction - nom de la fonction qui s'éxecute au click
  */
-function createButton(classValue, value, parent, clickFunction) {
+function createInputButton(classValue, value, parent, clickFunction) {
 
     //création de la balise <input class="classValue" type="button" value="value"/> :
     const buttonElement = document.createElement("input");
@@ -210,6 +210,27 @@ function createImg(srcValue, altValue, parent){
 }
 
 
+/**
+ * Création d'une balise button avec icone dans innerText
+ * @param { "String" } classValue - valeur de l'attribut class
+ * @param { String } clickFunction - nom de la fonction qui s'éxecute au click
+ * @param { "String" } innerTextValue - texte dans le bouton
+ * @param { String } parent - nom du parent où la balise HTML est rattachée
+ */
+function createIconeButton(classValue, clickFunction, innerTextValue, parent) {
+
+    //création de la balise <button type="button" class="classValue" onclick="clickFunction">innerTextValue</button> :
+    const buttonElement = document.createElement("button");
+    buttonElement.className = classValue;
+    buttonElement.type = "button";
+    buttonElement.onclick = clickFunction;
+    buttonElement.innerHTML = innerTextValue;
+
+    // rattachement de la balise au DOM sous le parent :
+    parent.appendChild(buttonElement);
+
+}
+
 
 //*************************************BUTTONS FUNCTIONS******************************************//
 
@@ -240,17 +261,17 @@ function showSearchForm() {
     createInputText("author", "author", form);
 
     // <input class="searchButton" type="button" value="Rechercher"/> sous form class="searchForm"
-    createButton("searchButton", "Rechercher", form, googleBooksApiCall);
+    createInputButton("searchButton", "Rechercher", form, googleBooksApiCall);
 
     // <input class="cancelButton" type="button" value="Annuler"/> sous form class="searchForm"
-    createButton("cancelButton", "Annuler", form, cancel);
+    createInputButton("cancelButton", "Annuler", form, cancel);
 
 }
 
 /**
  * Affiche la section Résultats de recherche si response = OK
  */
-function showSearchResults(data) {
+function showSearchResults(results) {
 
     //Si section searchResults existe déjà alors efface le contenu
     if (document.getElementById("searchResults")) {
@@ -275,28 +296,58 @@ function showSearchResults(data) {
     // création de la balise <h2 class="resultsOfSearch">Résultats de recherche</h2> sous section id="searchResults"
     createTagWithClassAttributeAndInnertext("h2", searchResultsSection, "resultsOfSearch", "Résultats de recherche");
 
-    if (data.totalItems == 0) {
+    if (results.totalItems == 0) {
 
         // création de la balise <h3 class="noBook">Aucun livre n'a été trouvé !</h3> sous section id="searchResults"
         createTagWithClassAttributeAndInnertext("h3", searchResultsSection, "noBook", "Aucun livre n'a été trouvé !");
         
     } else {
         
-        console.log("testTTTTTTrouvé");
-        
         // 	création de la balise <div class="books" id="googleBooks"> sous section id="searchResults"
+        const divElement = document.createElement("div");
+        divElement.className = "books";
+        divElement.id = "googleBooks";
+        searchResultsSection.appendChild(divElement);
+        const googleBooksDiv = document.getElementById("googleBooks");
 
-        // 	création de la balise <article> sous div id="googleBooks"
-        // 	création de la balise <div class="titleIdAuthorButton"> sous article
-        // 	création de la balise <div class="titleIdAuthor"> sous div class="titleIdAuthorButton"
-        // 	création de la balise <h3 class="bookTitle">Titre : Titre du Livre</h3> sous div class="titleIdAuthor"
-        // 	création de la balise <h4 class="id">Id : Identifant du livre</h4> sous div class="titleIdAuthor"
-        // 	création de la balise <h5 class="bookAuthor">Auteur : Auteur du livre</h5> sous div class="titleIdAuthor"
-        // 	création de la balise <button type="button" class="bookmark" onclick="saveTheBook()"><i class="fa-solid fa-bookmark"></i></button> sous div class="titleIdAuthorButton"
-        // 	création de la balise <p class="description">Description : xxxxxxxxxx</p> sous article
-        // 	création de la balise <img src="images/unavailable.png" alt="image du livre"> sous article
-      
-    }    
+        for (let i = 0; i < results.items.length; i++) {
+
+            const bookArticle = createBookArticle(results.items[i]);
+            googleBooksDiv.appendChild(bookArticle);
+            
+        }
+    }
+}
+
+
+function createBookArticle(book) {
+
+    const title = book.volumeInfo.title ? book.volumeInfo.title : "Information manquante";
+    const author = book.volumeInfo.authors ? book.volumeInfo.authors[0] : "Information manquante";
+    const description = book.volumeInfo.description ? book.volumeInfo.description.substring(0,200)+"..." : "Information manquante";
+    const image = book.volumeInfo.imageLinks ? book.volumeInfo.imageLinks.thumbnail : "images/unavailable.png";
+
+    const article = document.createElement("article");
+
+    // Création du contenu
+    article.innerHTML = `
+        <div class="titleIdAuthorButton">
+            <div class="titleIdAuthor">
+                <h3 class="bookTitle">Titre : ${title}</h3>
+                <h4 class="id">Id : ${book.id}</h4>
+                <h5 class="bookAuthor">Auteur : ${author}</h5>
+            </div>
+            <button type="button" class="bookmark" onclick="saveTheBook()">
+                <i class="fa-solid fa-bookmark"></i>
+            </button>
+        </div>
+        <p class="description">
+            Description : ${description}
+        </p>
+        <img src="${image}" alt="image du livre">
+    `; 
+
+    return article;
 
 }
 
@@ -315,7 +366,7 @@ function cancel() {
 
     //création de la balise <input class="addBookButton" type="button" value="Ajouter un livre"/>
     //Au clic sur “Ajouter un livre”, le formulaire de recherche s’affiche :
-    createButton("addBookButton", "Ajouter un livre", divSection, showSearchForm);
+    createInputButton("addBookButton", "Ajouter un livre", divSection, showSearchForm);
 
     //supprime la section Résultats de recherche
     if (document.getElementById("searchResults")) {
@@ -328,16 +379,20 @@ function cancel() {
 }
 
 
-function showSavedBooks() {
-    
+function saveTheBook() {
+
+    console.log( "booooookkk");
+
 }
 
 
-function saveTheBook() {
-
+function showSavedBooks() {
+    
 }
 
 
 function removeTheBook(){
 
 }
+
+

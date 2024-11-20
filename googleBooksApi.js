@@ -28,10 +28,10 @@ function googleBooksApiCall() {
                 return response.json();
 
             })
-            .then(data => {
+            .then(results => {
                 
-                console.log("Résultats de la recherche :", data);
-                showSearchResults(data);
+                console.log("Résultats de la recherche :", results);
+                showSearchResults(results);
 
             })
             .catch((err) => {
