@@ -12,7 +12,7 @@ function googleBooksApiCall() {
     const author = document.getElementById("author");
 
     //Vérification des champs :
-    if (title.value !== "" || author.value !== "") {
+    if (title.value !== "" && author.value !== "") {
 
         //Requête à l'API Google Book
         const url = `https://www.googleapis.com/books/v1/volumes?q=${title.value}+inauthor:${author.value}&key=AIzaSyC22WffRXCw5NU_2nMYtCGnx9VLhREOYjo`;
