@@ -8,6 +8,8 @@ $black : #000000;
 $white : #ffffff;
 $montserrat: 'Montserrat', sans-serif;
 $manrope: 'Manrope', sans-serif;
+$breakpoint-tablet: 768px;
+$breakpoint-desktop: 1024px;
 
 // Base styles
 html{
@@ -230,11 +232,17 @@ html{
 
 // Responsive design
 //tablets
-@media (min-width: 768px) {
+@media (min-width: $breakpoint-tablet) {
+  
+  #googleBooks, #savedBooks {
+    flex-direction: unset !important;
+    align-content: space-between;
+    flex-wrap: wrap;   
+  }
  
 }
 
 //desktops
-@media (min-width: 1024px) {
+@media (min-width: $breakpoint-desktop ) {
 
 }

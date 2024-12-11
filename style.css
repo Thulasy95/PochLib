@@ -179,4 +179,12 @@ html body main #searchResults #googleBooks {
   gap: 40px;
 }
 
+@media (min-width: 768px) {
+  #googleBooks, #savedBooks {
+    flex-direction: unset !important;
+    align-content: space-between;
+    flex-wrap: wrap;
+  }
+}
+
 /*# sourceMappingURL=style.css.map */
