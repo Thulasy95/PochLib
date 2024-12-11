@@ -1,0 +1,182 @@
+html {
+  background: #ffffff;
+}
+html * {
+  margin: 0;
+}
+html body {
+  font-family: "Manrope", sans-serif;
+  font-size: 1em;
+  background-color: #072321;
+}
+html body header, html body footer {
+  background-color: #ffffff;
+  padding: 20px 50px;
+  margin: 0;
+  text-align: center;
+}
+html body header .title, html body footer .title {
+  font-size: 2.5em;
+  color: #000000;
+  font-family: "Montserrat", sans-serif;
+}
+html body header .lien-icone img, html body footer .lien-icone img {
+  width: 4em;
+  height: 4em;
+}
+html body main section {
+  margin: 0;
+  padding: 50px 20px 50px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+html body main section h2 {
+  font-size: 1.5em;
+  font-family: "Montserrat", sans-serif;
+  margin-bottom: 25px;
+  color: #22b1a3;
+}
+html body main section .addBookAndSearchForm {
+  width: 100%;
+}
+html body main section .addBookAndSearchForm .addBookButton {
+  display: block;
+  margin: auto;
+  height: 30px;
+  width: 130px;
+  padding: 0px 20px;
+  background: linear-gradient(#187c72, #bde8e3);
+  color: #ffffff;
+  border: none;
+  border-radius: 50px;
+}
+html body main section .addBookAndSearchForm .addBookButton:hover {
+  background: linear-gradient(#0a3531, #64c8bf);
+  cursor: pointer;
+}
+html body main section .addBookAndSearchForm form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  width: 100%;
+  margin: 0;
+  color: #ffffff;
+}
+html body main section .addBookAndSearchForm form .searchButton {
+  display: block;
+  height: 30px;
+  width: 130px;
+  padding: 0px 20px;
+  margin: 20px auto;
+  background: linear-gradient(green, #bde8e3);
+  color: #ffffff;
+  border: none;
+  border-radius: 50px;
+}
+html body main section .addBookAndSearchForm form .searchButton:hover {
+  background: linear-gradient(#0a3531, green);
+  cursor: pointer;
+}
+html body main section .addBookAndSearchForm form .cancelButton {
+  display: block;
+  margin: auto;
+  height: 30px;
+  width: 130px;
+  padding: 0px 20px;
+  background: linear-gradient(red, #bde8e3);
+  color: #ffffff;
+  border: none;
+  border-radius: 50px;
+}
+html body main section .addBookAndSearchForm form .cancelButton:hover {
+  background: linear-gradient(#0a3531, red);
+  cursor: pointer;
+}
+html body main section hr {
+  color: transparent;
+}
+html body main section article {
+  width: 320px;
+  height: auto;
+  padding: 15px;
+  background-color: #e9f7f6;
+  border-radius: 20px;
+}
+html body main section article:hover {
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+}
+html body main section article .titleIdAuthorButton {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+html body main section article .titleIdAuthorButton h4 {
+  font-size: 0.8em;
+  font-style: italic;
+  margin-top: 5px;
+}
+html body main section article .titleIdAuthorButton h5 {
+  font-size: 0.8em;
+  font-style: italic;
+  font-weight: 300;
+  margin-top: 5px;
+}
+html body main section article .titleIdAuthorButton .iconeButton {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+html body main section article .titleIdAuthorButton .iconeButton .fa-trash {
+  font-size: 20px;
+  background: linear-gradient(#0a3531, red);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+html body main section article .titleIdAuthorButton .iconeButton .fa-trash:hover {
+  background: linear-gradient(red, #bde8e3);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+html body main section article .titleIdAuthorButton .iconeButton .fa-bookmark {
+  font-size: 20px;
+  background: linear-gradient(#0a3531, green);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+html body main section article .titleIdAuthorButton .iconeButton .fa-bookmark:hover {
+  background: linear-gradient(green, #bde8e3);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+html body main section article p {
+  font-size: 0.8em;
+  margin-top: 5px;
+}
+html body main section article img {
+  width: 150px;
+  height: 210px;
+  display: block;
+  margin: 10px auto 5px auto;
+}
+html body main section #savedBooks {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 40px;
+}
+html body main section #savedBooks article:hover {
+  box-shadow: 0 8px 16px 0 rgba(255, 255, 255, 0.8);
+}
+html body main #searchResults {
+  background-color: #ffffff;
+}
+html body main #searchResults #googleBooks {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 40px;
+}
+
+/*# sourceMappingURL=style.css.map */
